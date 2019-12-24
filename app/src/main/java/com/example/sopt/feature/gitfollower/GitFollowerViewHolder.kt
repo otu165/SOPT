@@ -18,5 +18,15 @@ class GitFollowerViewHolder(view : View) : RecyclerView.ViewHolder(view) {
     fun bind(data : GitFollowerItem) {
         txtId.text = data.id
         txtName.text = data.name
+
+        //ClickListener 설정
+        view.setOnClickListener {
+            Toast.makeText(view.context, "${txtId.text} 의 저장소 내역을 출력합니다.", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(view.context, GitRepoActivity::class.java)
+                .putExtra("id", txtId.text.toString())
+
+            view.context.startActivity(intent)
+        }
     }
 }

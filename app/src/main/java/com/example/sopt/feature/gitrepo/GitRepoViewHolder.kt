@@ -10,7 +10,7 @@ class GitRepoViewHolder(view : View) : RecyclerView.ViewHolder(view) {
     private val view : View = view.findViewById(R.id.rvRepoItem)
 
     private val txtTitle : TextView = view.findViewById(R.id.txtRvItemTitle)
-    private val txtInfo : TextView = view.findViewById(R.id.txtGitRepoInfo)
+    private val txtInfo : TextView = view.findViewById(R.id.txtRvItemInfo)
     private val txtLanguage : TextView = view.findViewById(R.id.txtRvItemLang)
 
     fun bind(data : GitRepoItem) {
