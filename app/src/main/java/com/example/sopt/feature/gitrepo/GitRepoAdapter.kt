@@ -1,9 +1,11 @@
-package com.example.sopt
+package com.example.sopt.feature.gitrepo
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sopt.R
+import com.example.sopt.data.GitRepoItem
 
 class GitRepoAdapter(private val context : Context) : RecyclerView.Adapter<GitRepoViewHolder>() {
     var data = listOf<GitRepoItem>()

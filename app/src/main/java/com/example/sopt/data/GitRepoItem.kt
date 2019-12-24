@@ -1,4 +1,4 @@
-package com.example.sopt
+package com.example.sopt.data
 
 data class GitRepoItem(
     val name : String,

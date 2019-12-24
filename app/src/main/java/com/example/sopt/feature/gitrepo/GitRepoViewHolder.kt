@@ -1,10 +1,10 @@
-package com.example.sopt
+package com.example.sopt.feature.gitrepo
 
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
+import com.example.sopt.R
+import com.example.sopt.data.GitRepoItem
 
 class GitRepoViewHolder(view : View) : RecyclerView.ViewHolder(view) {
     private val view : View = view.findViewById(R.id.rvRepoItem)

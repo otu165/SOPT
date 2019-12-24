@@ -1,10 +1,12 @@
-package com.example.sopt
+package com.example.sopt.feature.gitrepo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sopt.R
+import com.example.sopt.data.GitRepoItem
 
 class GitRepoActivity : AppCompatActivity() {
     private lateinit var rvGitRepo : RecyclerView
@@ -29,33 +31,7 @@ class GitRepoActivity : AppCompatActivity() {
         rvGitRepo.layoutManager = LinearLayoutManager(this)
 
         //데이터 전달
-        gitRepoAdapter.data = listOf(
-            GitRepoItem(
-                name = "A",
-                age = 20,
-                major = "컴퓨터공학과"
-            ),
-            GitRepoItem(
-                name = "B",
-                age = 21,
-                major = "컴퓨터공학과"
-            ),
-            GitRepoItem(
-                name = "C",
-                age = 22,
-                major = "컴퓨터공학과"
-            ),
-            GitRepoItem(
-                name = "D",
-                age = 23,
-                major = "컴퓨터공학과"
-            ),
-            GitRepoItem(
-                name = "E",
-                age = 24,
-                major = "컴퓨터공학과"
-            )
-        )
+        gitRepoAdapter.data = GitRepoRepository().getRepoList()
 
         //데이터 변화 알림
         gitRepoAdapter.notifyDataSetChanged()

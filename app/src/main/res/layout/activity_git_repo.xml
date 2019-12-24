@@ -5,6 +5,6 @@
     android:id="@+id/rvGitRepo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GitRepoActivity">
+    tools:context=".feature.gitrepo.GitRepoActivity">
 
 </androidx.recyclerview.widget.RecyclerView>
