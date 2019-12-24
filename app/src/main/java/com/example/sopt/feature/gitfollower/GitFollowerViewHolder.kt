@@ -1,12 +1,14 @@
 package com.example.sopt.feature.gitfollower
 
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sopt.R
 import com.example.sopt.data.GitFollowerItem
-import kotlinx.android.synthetic.main.rv_follower_item.view.*
-import org.w3c.dom.Text
+import com.example.sopt.feature.gitrepo.GitRepoActivity
 
 class GitFollowerViewHolder(view : View) : RecyclerView.ViewHolder(view) {
     private val view : View = view.findViewById(R.id.rvFollowerItem)
