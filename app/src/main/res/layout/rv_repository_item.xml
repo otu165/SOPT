@@ -6,36 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="150dp">
 
+    <ImageView
+        android:id="@+id/imgRvItemImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtRvItemId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="깃허브 아이디"
+        app:layout_constraintStart_toEndOf="@+id/imgRvItemImg"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtRvItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="이름"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtRvItemAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:text="나이"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRvItemName" />
-
-    <TextView
-        android:id="@+id/txtRvItemMajor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:text="전공"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRvItemAge" />
+        android:text="사용자 이름"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imgRvItemImg"
+        app:layout_constraintTop_toBottomOf="@+id/txtRvItemId" />
 </androidx.constraintlayout.widget.ConstraintLayout>

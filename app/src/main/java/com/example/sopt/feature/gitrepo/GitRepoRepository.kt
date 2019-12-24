@@ -6,29 +6,39 @@ class GitRepoRepository {
     public fun getRepoList() : List<GitRepoItem> {
         return listOf(
             GitRepoItem(
-                name = "A",
-                age = 20,
-                major = "컴퓨터공학과"
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
             ),
             GitRepoItem(
-                name = "B",
-                age = 21,
-                major = "컴퓨터공학과"
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
             ),
             GitRepoItem(
-                name = "C",
-                age = 22,
-                major = "컴퓨터공학과"
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
             ),
             GitRepoItem(
-                name = "D",
-                age = 23,
-                major = "컴퓨터공학과"
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
             ),
             GitRepoItem(
-                name = "E",
-                age = 24,
-                major = "컴퓨터공학과"
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
+            ),
+            GitRepoItem(
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
+            ),
+            GitRepoItem(
+//                img = "@drawable/sheep",
+                id = "greedy0110",
+                name = "Seungmin Shin"
             )
         )
     }

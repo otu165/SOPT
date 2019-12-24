@@ -1,7 +1,10 @@
 package com.example.sopt.data
 
+import android.graphics.drawable.Drawable
+
+//RecyclerView의 item
 data class GitRepoItem(
-    val name : String,
-    val age : Int,
-    val major : String
+//    val img : String,
+    val id : String,
+    val name : String
 )
