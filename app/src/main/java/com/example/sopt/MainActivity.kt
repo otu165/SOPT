@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
 
             //정상 로그인
             Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this@MainActivity, GitRepoActivity::class.java)
+            startActivity(intent)
+
+            this.finish()
         }
 
         //회원가입
