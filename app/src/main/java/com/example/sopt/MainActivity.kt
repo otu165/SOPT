@@ -13,8 +13,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class MainActivity : AppCompatActivity() {
-
     private val BACK_FROM_SIGN_UP_ACTIVITY = 1
+    private var backKeyPressedTime : Long = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +65,19 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    //뒤로가기 2번 종료
+    override fun onBackPressed() {
+        val toast = Toast.makeText(this, "\'뒤로\'버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
+
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis()
+            toast.show()
+        } else if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            this.finish()
+            toast.cancel()
         }
     }
 }
