@@ -1,42 +1,35 @@
-package com.example.sopt.feature.gitrepo
+package com.example.sopt.feature.gitfollower
 
-import com.example.sopt.data.GitRepoItem
+import com.example.sopt.data.GitFollowerItem
 
-class GitRepoRepository {
-    public fun getRepoList() : List<GitRepoItem> {
+class GitFollowerList {
+    fun getFollowerList() : List<GitFollowerItem> {
         return listOf(
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             ),
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             ),
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             ),
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             ),
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             ),
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             ),
-            GitRepoItem(
-//                img = "@drawable/sheep",
+            GitFollowerItem(
                 id = "greedy0110",
                 name = "Seungmin Shin"
             )

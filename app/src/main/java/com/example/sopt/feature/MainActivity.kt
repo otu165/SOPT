@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.sopt.R
-import com.example.sopt.feature.gitrepo.GitRepoActivity
+import com.example.sopt.feature.gitfollower.GitFollowerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
             //정상 로그인
             Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@MainActivity, GitRepoActivity::class.java)
+            val intent = Intent(this@MainActivity, GitFollowerActivity::class.java)
             startActivity(intent)
 
             this.finish()
