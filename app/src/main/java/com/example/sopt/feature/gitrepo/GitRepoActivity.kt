@@ -36,7 +36,7 @@ class GitRepoActivity : AppCompatActivity() {
     }
 
     private fun getGitRepo() {
-        val call : Call<List<GitRepoData>> = GitRepoServiceImpl.service.getRepos("jiss02")
+        val call : Call<List<GitRepoData>> = GitRepoServiceImpl.service.getRepos(intent.getStringExtra("id"))
 
         call.enqueue(
             object : Callback<List<GitRepoData>> {

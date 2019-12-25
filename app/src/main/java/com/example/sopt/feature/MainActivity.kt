@@ -37,8 +37,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             //정상 로그인
-            Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$id 님 확인되었습니다.", Toast.LENGTH_SHORT).show()
+
             val intent = Intent(this@MainActivity, GitFollowerActivity::class.java)
+                .putExtra("id", id)
             startActivity(intent)
 
             this.finish()

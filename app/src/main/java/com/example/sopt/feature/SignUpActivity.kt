@@ -20,7 +20,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUpFunction() {
         //회원가입
-        btnSignUpSignUp.setOnClickListener {
+        btnSignUpSignUp?.setOnClickListener {
             val name  = edtSignUpName.text.toString()
             val id = edtSignUpId.text.toString()
             val pwd = edtSignUpPwd.text.toString()
