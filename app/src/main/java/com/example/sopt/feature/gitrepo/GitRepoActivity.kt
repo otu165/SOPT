@@ -6,8 +6,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sopt.R
-import com.example.sopt.api.GitRepoService
-import com.example.sopt.api.GitRepoServiceImpl
+import com.example.sopt.api.gitrepo.GitRepoServiceImpl
 import com.example.sopt.data.GitRepoData
 import retrofit2.Call
 import retrofit2.Callback

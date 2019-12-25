@@ -1,16 +1,16 @@
-package com.example.sopt.api
+package com.example.sopt.api.gitfollower
 
-import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object GitRepoServiceImpl {
+object GitFollowerServiceImpl {
     private const val BASE_URL = "https://api.github.com"
 
-    private val retrofit : Retrofit = Retrofit.Builder()
+    private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val service : GitRepoService = retrofit.create(GitRepoService::class.java)
+    val service : GitFollowerService = retrofit.create(
+        GitFollowerService::class.java)
 }

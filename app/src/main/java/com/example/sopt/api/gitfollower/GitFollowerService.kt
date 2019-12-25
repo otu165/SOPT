@@ -1,4 +1,4 @@
-package com.example.sopt.api
+package com.example.sopt.api.gitfollower
 
 import com.example.sopt.data.GitFollowerData
 import retrofit2.Call

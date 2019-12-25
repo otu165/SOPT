@@ -2,15 +2,13 @@ package com.example.sopt.feature.gitfollower
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.RecoverySystem
 import android.util.Log
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.sopt.R
-import com.example.sopt.api.GitFollowerServiceImpl
+import com.example.sopt.api.gitfollower.GitFollowerServiceImpl
 import com.example.sopt.data.GitFollowerData
 import retrofit2.Call
 import retrofit2.Callback

@@ -4,15 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.sopt.R
+import com.example.sopt.api.signin.SignInServiceImpl
+import com.example.sopt.data.SignInData
 import com.example.sopt.feature.gitfollower.GitFollowerActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private val BACK_FROM_SIGN_UP_ACTIVITY = 1
     private var backKeyPressedTime : Long = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //정상 로그인
-            Toast.makeText(this, "$id 님 확인되었습니다.", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this@MainActivity, GitFollowerActivity::class.java)
-                .putExtra("id", id)
-            startActivity(intent)
-
-            this.finish()
+            requestSignIn(id, pwd)
         }
 
         //회원가입
@@ -54,6 +53,33 @@ class MainActivity : AppCompatActivity() {
 
             startActivityForResult(intent, BACK_FROM_SIGN_UP_ACTIVITY)
         }
+    }
+
+    private fun requestSignIn(id : String, pwd : String) {
+        val call : Call<SignInData> = SignInServiceImpl.service.requestSignIn(SignInData(id, pwd))
+
+        call.enqueue(
+            object : Callback<SignInData> {
+                override fun onFailure(call: Call<SignInData>, t: Throwable) {
+                    Log.e("TAG", "MainActivity 서버 통신 불가")
+                }
+
+                override fun onResponse(call: Call<SignInData>, response: Response<SignInData>) {
+                    if(response.isSuccessful) {
+                        Toast.makeText(applicationContext, "$id 님 확인되었습니다.", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(this@MainActivity, GitFollowerActivity::class.java)
+                            .putExtra("id", id)
+                        startActivity(intent)
+
+                        finish()
+                    }
+                    else {
+                        Toast.makeText(applicationContext, "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
