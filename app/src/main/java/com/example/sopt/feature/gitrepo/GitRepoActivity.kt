@@ -2,9 +2,16 @@ package com.example.sopt.feature.gitrepo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sopt.R
+import com.example.sopt.api.GitRepoService
+import com.example.sopt.api.GitRepoServiceImpl
+import com.example.sopt.data.GitRepoData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class GitRepoActivity : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
@@ -22,14 +29,31 @@ class GitRepoActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvGitRepo)
         adapter = GitRepoAdapter(this)
 
-        //adapter 및 manager 지정
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        //데이터 전달
-        adapter.data = GitRepoList().getRepoList()
+        getGitRepo()
+    }
 
-        //데이터 변화 알림
-        adapter.notifyDataSetChanged()
+    private fun getGitRepo() {
+        val call : Call<List<GitRepoData>> = GitRepoServiceImpl.service.getRepos("jiss02")
+
+        call.enqueue(
+            object : Callback<List<GitRepoData>> {
+                override fun onFailure(call: Call<List<GitRepoData>>, t: Throwable) {
+                    Log.e("TAG", "GitRepoActivity 서버통신불가")
+                }
+
+                override fun onResponse(
+                    call: Call<List<GitRepoData>>,
+                    response: Response<List<GitRepoData>>
+                ) {
+                    if (response.isSuccessful) {
+                        adapter.data = response.body()!!
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        )
     }
 }

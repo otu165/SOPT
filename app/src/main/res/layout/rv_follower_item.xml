@@ -40,4 +40,5 @@ android:layout_height="150dp">
     android:textStyle="bold"
     app:layout_constraintStart_toEndOf="@+id/imgRvItemImg"
     app:layout_constraintTop_toBottomOf="@+id/txtRvFollowerItemId" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
