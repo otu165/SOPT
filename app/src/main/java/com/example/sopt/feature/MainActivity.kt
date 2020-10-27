@@ -4,10 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.sopt.R
-import com.example.sopt.feature.gitfollower.GitFollowerActivity
+import com.example.sopt.api.ServiceImpl
+import com.example.sopt.data.GitUserData
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private val BACK_FROM_SIGN_UP_ACTIVITY = 1
@@ -23,37 +27,51 @@ class MainActivity : AppCompatActivity() {
 
     private fun mainFunction() {
         //로그인
-        btnMainLogIn?.setOnClickListener {
-            val id = edtMainId.text.toString()
-            val pwd = edtMainPwd.text.toString()
-
-            //미기입 항목 존재
-            if(id.isEmpty()) {
-                Toast.makeText(this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            } else if(pwd.isEmpty()) {
-                Toast.makeText(this, "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+        txtMainLogIn.setOnClickListener {
+            if(isValidSignInRequest(edtMainId.text.toString())) {
+                requestSignIn(edtMainId.text.toString())
             }
-
-            //정상 로그인
-            Toast.makeText(this, "$id 님 확인되었습니다.", Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this@MainActivity, GitFollowerActivity::class.java)
-                .putExtra("id", id)
-            startActivity(intent)
-
-            this.finish()
+            else {
+                Toast.makeText(this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         //회원가입
-        btnMainSignUp?.setOnClickListener {
-            val intent = Intent(this@MainActivity, SignUpActivity::class.java)
-                .putExtra("id", edtMainId.text.toString())
-                .putExtra("pwd", edtMainPwd.text.toString())
-
+        txtMainSignUp.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivityForResult(intent, BACK_FROM_SIGN_UP_ACTIVITY)
         }
+    }
+
+    private fun requestSignIn(id : String) {
+        val call = ServiceImpl.service.getUser(id)
+        Log.d(TAG, "id : $id")
+
+        call.enqueue(
+            object : retrofit2.Callback<GitUserData> {
+                override fun onResponse(call: Call<GitUserData>, response: Response<GitUserData>) {
+                    if(response.isSuccessful) {
+                        val intent = Intent(this@MainActivity, GitActivity::class.java)
+                            .putExtra("id", id)
+                        startActivity(intent)
+
+                        Toast.makeText(this@MainActivity, "${id}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    else { // status != 200
+                        Toast.makeText(this@MainActivity, "존재하지 않는 사용자입니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<GitUserData>, t: Throwable) {
+                    Log.d(TAG, "requestSignIn onFailure")
+                }
+            }
+        )
+    }
+
+    private fun isValidSignInRequest(id : String?) : Boolean {
+        return !id.isNullOrEmpty()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -64,7 +82,6 @@ class MainActivity : AppCompatActivity() {
                 when(resultCode) {
                     Activity.RESULT_OK -> {
                         edtMainId.setText(data?.getStringExtra("id"))
-                        edtMainPwd.setText(data?.getStringExtra("pwd"))
                     }
                 }
             }
@@ -82,5 +99,9 @@ class MainActivity : AppCompatActivity() {
             this.finish()
             toast.cancel()
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

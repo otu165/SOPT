@@ -5,15 +5,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sopt.R
 import com.example.sopt.data.GitRepoData
-import kotlinx.android.synthetic.main.activity_git_repo.view.*
 
 class GitRepoViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-    private val view : View = view.findViewById(R.id.rvRepoItem)
+    private val view : View = view.findViewById(R.id.rvGitRepoItem)
 
-    private val title : TextView = view.findViewById(R.id.txtRvItemTitle)
-    private val info : TextView = view.findViewById(R.id.txtRvItemInfo)
-    private val date : TextView = view.findViewById(R.id.txtRvItemDate)
-    private val language : TextView = view.findViewById(R.id.txtRvItemLang)
+    private val title : TextView = view.findViewById(R.id.txtRvGitRepoName)
+    private val info : TextView = view.findViewById(R.id.txtRvGitRepoDescription)
+    private val date : TextView = view.findViewById(R.id.txtRvGitRepoUpdatedAt)
+    private val language : TextView = view.findViewById(R.id.txtRvGitRepoLanguage)
 
     fun bind(data : GitRepoData) {
         title.text = data.name

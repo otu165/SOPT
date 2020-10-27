@@ -14,7 +14,6 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        initialEditText()
         signUpFunction()
     }
 
@@ -45,16 +44,9 @@ class SignUpActivity : AppCompatActivity() {
             //정상 회원가입
             val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                 .putExtra("id", id)
-                .putExtra("pwd", pwd)
 
             setResult(Activity.RESULT_OK, intent)
             this.finish()
         }
-    }
-
-    //EditText 초기화
-    private fun initialEditText() {
-        edtSignUpId.setText(intent.getStringExtra("id"))
-        edtSignUpPwd.setText(intent.getStringExtra("pwd"))
     }
 }
