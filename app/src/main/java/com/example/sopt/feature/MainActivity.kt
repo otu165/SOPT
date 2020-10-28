@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun mainFunction() {
         // check sign in happened or not
         val id = User.getUser(this)
+        Log.d(TAG, "id : $id")
         if (!id.isNullOrEmpty()) {
             startGitActivity(id)
         }

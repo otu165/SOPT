@@ -35,6 +35,6 @@ object User {
 
     fun clearFollower(context : Context) {
         val sharedPreferences = context.getSharedPreferences(LOGIN_KEY, Context.MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply()
+        sharedPreferences.edit().remove(FOLLOWER_KEY).apply()
     }
 }
