@@ -1,18 +1,15 @@
-package com.example.sopt.feature.gitfollower
+package com.example.sopt.feature.git.fragment.gitfollower
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.os.Build
-import android.os.StrictMode
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sopt.R
 import com.example.sopt.data.GitFollowerData
-import java.net.URL
+import com.example.sopt.data.User
+import com.example.sopt.feature.git.GitActivity
 
 class GitFollowerViewHolder(view : View) : RecyclerView.ViewHolder(view) {
     private val view : View = view.findViewById(R.id.rvGitFollowerItem)
@@ -25,5 +22,14 @@ class GitFollowerViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         id.text = data.id
         name.text = data.name
         Glide.with(view).load(data.img).into(img)
+
+        // handle click event
+        view.setOnClickListener {
+            User.setFollower(view.context, data.id)
+
+            val intent = Intent(view.context, GitActivity::class.java)
+            view.context.startActivity(intent)
+
+        }
     }
 }

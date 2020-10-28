@@ -1,4 +1,4 @@
-package com.example.sopt.feature.fragment
+package com.example.sopt.feature.git.fragment.gitfollower
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sopt.R
 import com.example.sopt.api.ServiceImpl
 import com.example.sopt.data.GitFollowerData
-import com.example.sopt.feature.GitActivity
-import com.example.sopt.feature.gitfollower.GitFollowerAdapter
-import com.example.sopt.feature.gitfollower.GitFollowerViewHolder
-import kotlinx.android.synthetic.main.fragment_follower.*
+import com.example.sopt.data.User
+import com.example.sopt.feature.git.GitActivity
+import com.example.sopt.feature.git.fragment.gitfollower.GitFollowerAdapter
 import kotlinx.android.synthetic.main.fragment_follower.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,13 +32,19 @@ class FollowerFragment : Fragment() {
     }
 
     private fun followerFunction(view : View) {
-        // 1. RecyclerView
+        // make RecyclerView
         val rvAdapter = GitFollowerAdapter(requireContext())
         view.rvGitFollower.adapter = rvAdapter
         view.rvGitFollower.layoutManager = LinearLayoutManager(requireContext())
+        requestFollowerData(rvAdapter, if(isMainUser()) User.getUser(requireContext()) else User.getFollower(requireContext()))
+    }
 
-        // 2. data
-        val call : Call<List<GitFollowerData>> = ServiceImpl.service.getFollower((activity as GitActivity).gitId)
+    private fun isMainUser() : Boolean {
+        return User.getFollower(requireContext()).isNullOrEmpty()
+    }
+
+    private fun requestFollowerData(rvAdapter: GitFollowerAdapter, id : String) {
+        val call : Call<List<GitFollowerData>> = ServiceImpl.service.getFollower(id)
 
         call.enqueue(
             object : Callback<List<GitFollowerData>> {
@@ -59,7 +64,6 @@ class FollowerFragment : Fragment() {
                 }
             }
         )
-
     }
 
 }

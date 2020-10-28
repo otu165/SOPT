@@ -18,21 +18,21 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpFunction() {
-        //회원가입
+        // request sign up
         btnSignUpSignUp?.setOnClickListener {
             val name  = edtSignUpName.text.toString()
             val id = edtSignUpId.text.toString()
             val pwd = edtSignUpPwd.text.toString()
             val pwdChk = edtSignUpPwdChk.text.toString()
 
-            //미입력 항목 존재
+            // check blank
             if(name.isEmpty() || id.isEmpty() || pwd.isEmpty() || pwdChk.isEmpty()) {
                 Toast.makeText(this, "모든 항목을 입력하세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            //비밀번호 불일치
-            if(!pwd.equals(pwdChk)) {
+            // handle difference between passwords
+            if(pwd != pwdChk) {
                 Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
 
                 edtSignUpPwdChk.text = null
@@ -41,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            //정상 회원가입
+            // request sign up
             val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                 .putExtra("id", id)
 

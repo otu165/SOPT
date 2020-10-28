@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.GitActivity"></activity>
+        <activity android:name=".feature.git.GitActivity"></activity>
         <activity android:name=".feature.gitrepo.GitRepoActivity" />
         <activity android:name=".feature.gitfollower.GitFollowerActivity" />
         <activity android:name=".feature.SignUpActivity" />

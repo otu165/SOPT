@@ -1,4 +1,4 @@
-package com.example.sopt.feature.gitfollower
+package com.example.sopt.feature.git.fragment.gitfollower
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.sopt.feature.fragment
+package com.example.sopt.feature.git.fragment.gitrepo
 
 import android.os.Bundle
 import android.util.Log
@@ -6,15 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.example.sopt.R
-import com.example.sopt.feature.gitrepo.GitRepoAdapter
+import com.example.sopt.feature.git.fragment.gitrepo.GitRepoAdapter
 import kotlinx.android.synthetic.main.fragment_repo.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sopt.api.ServiceImpl
 import com.example.sopt.data.GitRepoData
-import com.example.sopt.feature.GitActivity
-import com.example.sopt.feature.MainActivity
+import com.example.sopt.data.User
+import com.example.sopt.feature.git.GitActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +24,6 @@ class RepoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view : View = inflater.inflate(R.layout.fragment_repo, container, false)
 
         repoFunction(view)
@@ -33,13 +31,19 @@ class RepoFragment : Fragment() {
     }
 
     private fun repoFunction(view : View) {
-        // 1. RecyclerView
+        // make RecyclerView
         val rvAdapter = GitRepoAdapter(view.context)
         view.rvGitRepo.adapter = rvAdapter
         view.rvGitRepo.layoutManager = LinearLayoutManager(view.context)
+        requestRepoData(rvAdapter, if(isMainUser()) User.getUser(requireContext()) else User.getFollower(requireContext()))
+    }
 
-        // 2. get data
-        val call : Call<List<GitRepoData>> = ServiceImpl.service.getRepos((activity as GitActivity).gitId)
+    private fun isMainUser() : Boolean {
+        return User.getFollower(requireContext()).isNullOrEmpty()
+    }
+
+    private fun requestRepoData(rvAdapter : GitRepoAdapter, id : String) {
+        val call : Call<List<GitRepoData>> = ServiceImpl.service.getRepos(id)
 
         call.enqueue(
             object : Callback<List<GitRepoData>> {

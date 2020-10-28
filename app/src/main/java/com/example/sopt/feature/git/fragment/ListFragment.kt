@@ -1,4 +1,4 @@
-package com.example.sopt.feature.fragment
+package com.example.sopt.feature.git.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sopt.R
+import com.example.sopt.feature.git.fragment.gitfollower.FollowerFragment
+import com.example.sopt.feature.git.fragment.gitrepo.RepoFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_list.view.*
 
@@ -15,7 +17,6 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
         listFunction(view)
@@ -39,11 +40,7 @@ class ListFragment : Fragment() {
 
                             else -> {
                                 requireActivity().supportFragmentManager.beginTransaction()
-                                    .replace(R.id.frameFragList, FollowerFragment().apply {
-                                        arguments = Bundle().apply {
-                                            putString("id", arguments?.getString("id"))
-                                        }
-                                    }).commit()
+                                    .replace(R.id.frameFragList, FollowerFragment()).commit()
                             }
                         }
                     }

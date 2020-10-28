@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.example.sopt.R
 import com.example.sopt.api.ServiceImpl
 import com.example.sopt.data.GitUserData
+import com.example.sopt.data.User
+import com.example.sopt.feature.git.GitActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
@@ -26,7 +28,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mainFunction() {
-        //로그인
+        // check sign in happened or not
+        val id = User.getUser(this)
+        if (!id.isNullOrEmpty()) {
+            startGitActivity(id)
+        }
+
+        // sign in click event
         txtMainLogIn.setOnClickListener {
             if(isValidSignInRequest(edtMainId.text.toString())) {
                 requestSignIn(edtMainId.text.toString())
@@ -36,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //회원가입
+        // sign up click event
         txtMainSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivityForResult(intent, BACK_FROM_SIGN_UP_ACTIVITY)
@@ -50,13 +58,9 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(
             object : retrofit2.Callback<GitUserData> {
                 override fun onResponse(call: Call<GitUserData>, response: Response<GitUserData>) {
-                    if(response.isSuccessful) {
-                        val intent = Intent(this@MainActivity, GitActivity::class.java)
-                            .putExtra("id", id)
-                        startActivity(intent)
-
-                        Toast.makeText(this@MainActivity, "${id}님 반갑습니다!", Toast.LENGTH_SHORT).show()
-                        finish()
+                    if(response.isSuccessful) { // sign in success
+                        User.setUser(this@MainActivity, id)
+                        startGitActivity(id)
                     }
                     else { // status != 200
                         Toast.makeText(this@MainActivity, "존재하지 않는 사용자입니다.", Toast.LENGTH_SHORT).show()
@@ -74,6 +78,15 @@ class MainActivity : AppCompatActivity() {
         return !id.isNullOrEmpty()
     }
 
+    private fun startGitActivity(id : String) {
+        val intent = Intent(this@MainActivity, GitActivity::class.java)
+            .putExtra("id", id)
+        startActivity(intent)
+
+        Toast.makeText(this@MainActivity, "${id}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+        this.finish()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -88,7 +101,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //뒤로가기 2번 종료
     override fun onBackPressed() {
         val toast = Toast.makeText(this, "\'뒤로\'버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
 

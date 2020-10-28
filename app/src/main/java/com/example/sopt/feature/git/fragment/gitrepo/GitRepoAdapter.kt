@@ -1,4 +1,4 @@
-package com.example.sopt.feature.gitrepo
+package com.example.sopt.feature.git.fragment.gitrepo
 
 import android.content.Context
 import android.view.LayoutInflater
