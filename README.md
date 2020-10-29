@@ -65,3 +65,9 @@
 
 ### 3. Follower 를 선택하면 해당 사용자의 정보 띄워주기
 <img src="https://user-images.githubusercontent.com/55652161/97411482-ab289980-1943-11eb-9d02-b9139fc6b964.gif" width="250">
+
+<br/>
+
+# 개발 환경
+- Android Studio 3.5
+
